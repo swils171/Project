@@ -12,3 +12,8 @@ Given the user is viewing one companies page
 When the user selects the home icon (the cooler)
 And selects a different company
 Then a different companies post will display
+
+Scenario: View post replies
+Given the user is viewing post from a company
+When the user selects a given post
+Then it will open a new page with the post enlarged and has the replies below the post
