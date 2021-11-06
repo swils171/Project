@@ -2,7 +2,7 @@
 
 whenever a user is viewing a post they made they should be able to delete it from the company.
 
-Scenario: Delete post from company
+Scenario: Delete post I made from a company
 Given the user is viewing their post
 When the user selects the post options button on their post
 And selects delete
