@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Water Color">
+        <title>The Cooler</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+		<nav>
+			<a href="{{ url_for('index') }}"> Home</a> ||
+			<a href="{{url_for('get_posts') }}"> My Posts</a> ||
+			<a href="{{ url_for('new_post') }}"> Add Post</a>
+		</nav>
+        <h1>Listing posts</h1>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+            </tr>
+            {% for pos in post%}
+            <tr>
+                <td><a href="{{ url_for('get_post',post_id=pos.id)}}">{{ pos.title }}</a></td>
+                <td>{{ pos.date }}</td>
+				<td><a href="{{ url_for('update_post', post_id=pos.id) }}">Edit</a></td>
+				<td>
+					<form action="{{ url_for('delete_post', post_id=pos.id) }}" method="post">
+					<input type="submit" value="Delete">
+					</form>
+				</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
