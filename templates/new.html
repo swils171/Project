@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Water Cooler">
+        <title>Adding Water</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+       <nav>
+			<a href="{{ url_for('index') }}"> Home</a> ||
+			<a href="{{url_for('get_posts') }}"> The Cooler</a>||
+			<a href="{{ url_for('new_post') }}"> Add Water</a>
+       </nav>
+
+        <h1>Welcome {{user.name}} to the Cooler!</h1>
+		{% if post %}
+			<form action="{{ url_for('update_note', post_id=post.id) }}" method="post">
+		{% else %}
+        <form action="new" method="post">
+		{% endif %}
+           <p><label>Title </label></p><p>  
+		   <input type="text" name="title" value ="{% if post %} {{post.title}} {% endif %}"/></p>
+            <p><label>Make Post </label></p>
+			<p><textarea name="postText"  rows="6" cols="0" >
+				{% if post %}
+					{{post.text}}
+				{% else %}
+					Add post here.
+				{% endif %}
+			</textarea>
+			</p>
+            <p>
+			{% if post %}
+			<input type="submit" value="Update Note"/>
+			{% else %}
+			<input type="submit" value="Add Note"/>
+			{% endif %}
+			</p>
+        </form>
+    </body>
+</html>
