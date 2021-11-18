@@ -73,7 +73,7 @@ def update_post(post_id):
         title = request.form['title']
         text = request.form['postText']
         posted = db.session.query(Post).filter_by(id=post_id).one()
-        posted.title = title;
+        posted.title = title
         posted.text = text
         db.session.add(posted)
         db.session.commit()
