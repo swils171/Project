@@ -16,6 +16,7 @@ class Note(db.Model):
         self.title = title
         self.text = text
         self.date = date
+        self.score = 0
         self.user_id = user_id
 
 

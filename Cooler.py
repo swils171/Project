@@ -219,7 +219,7 @@ def like_note(note_id):
     # check if a user is saved in session
     if session.get('user'):
         # retrieve note from database
-        note = db.session.query(User).filter_by(id=note_id)
+        note = db.session.query(Note).filter_by(id=note_id).one()
         note.score = note.score + 1
         db.session.commit()
         return redirect(url_for('get_note', note_id=note_id))
@@ -233,7 +233,7 @@ def dislike_note(note_id):
     # check if a user is saved in session
     if session.get('user'):
         # retrieve note from database
-        note = db.session.query(User).filter_by(id=note_id)
+        note = db.session.query(Note).filter_by(id=note_id).one()
         note.score = note.score - 1
         db.session.commit()
         return redirect(url_for('get_note', note_id=note_id))
