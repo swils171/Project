@@ -214,6 +214,34 @@ def new_comment(note_id):
         return redirect(url_for('login'))
 
 
+@app.route('/notes/<note_id>/Like', methods=['POST'])
+def like_note(note_id):
+    # check if a user is saved in session
+    if session.get('user'):
+        # retrieve note from database
+        note = db.session.query(User).filter_by(id=note_id)
+        note.score = note.score + 1
+        db.session.commit()
+        return redirect(url_for('get_note', note_id=note_id))
+    else:
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
+
+
+@app.route('/notes/<note_id>/Dislike', methods=['POST'])
+def dislike_note(note_id):
+    # check if a user is saved in session
+    if session.get('user'):
+        # retrieve note from database
+        note = db.session.query(User).filter_by(id=note_id)
+        note.score = note.score - 1
+        db.session.commit()
+        return redirect(url_for('get_note', note_id=note_id))
+    else:
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
+
+
 app.run(host=os.getenv('IP', '127.0.0.1'), port=int(os.getenv('PORT', 5000)), debug=True)
 
 # To see the web page in your web browser, go to the url,
