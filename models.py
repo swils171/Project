@@ -7,6 +7,7 @@ class Note(db.Model):
     title = db.Column("title", db.String(200))
     text = db.Column("text", db.String(100))
     date = db.Column("date", db.String(50))
+    score = db.Column("score", db.Integer)
     # can create a foreign key; referencing the id variable in the user class, so that is why it is lowercase u
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     comments = db.relationship("Comment", backref="note", cascade="all, delete-orphan", lazy=True)

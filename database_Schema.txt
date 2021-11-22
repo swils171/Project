@@ -1,0 +1,18 @@
+Table: user
+Attributes:
+id
+first_name
+last_name
+email
+password
+registered_on
+
+Table: note
+Attributes:
+id
+title
+text
+date
+user_id
+score
+
