@@ -43,7 +43,7 @@ def get_notes():
     # check if a user us saved in session
     if session.get('user'):
         # retrieve notes from database
-        my_notes = db.session.query(Note).filter_by(user_id=session['user_id']).all()
+        my_notes = db.session.query(Note).all() #.filter_by(user_id=session['user_id'])
 
         return render_template('notes.html', notes=my_notes, user=session['user'])
     else:
@@ -55,7 +55,7 @@ def get_note(note_id):
     # check if a user saved in session
     if session.get('user'):
         # retrieve note from database
-        my_note = db.session.query(Note).filter_by(id=note_id, user_id=session['user_id']).one()
+        my_note = db.session.query(Note).filter_by(id=note_id).one() #, user_id=session['user_id']
 
         # create a comment form object
         form = CommentForm()
