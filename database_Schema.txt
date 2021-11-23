@@ -1,3 +1,11 @@
+Table: comment
+id (int) #comment id
+date posted (date?)
+content varchar
+note_id foreign key
+user_id foreign key
+score INT
+
 Table: user
 Attributes:
 id
