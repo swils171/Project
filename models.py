@@ -44,9 +44,11 @@ class Comment(db.Model):
     content = db.Column(db.VARCHAR, nullable=False)
     note_id = db.Column(db.Integer, db.ForeignKey("note.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    score = db.Column("score", db.Integer)
 
     def __init__(self, content, note_id, user_id):
         self.date_posted = datetime.date.today()
         self.content = content
         self.note_id = note_id
         self.user_id = user_id
+        self.score = 0

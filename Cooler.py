@@ -43,7 +43,7 @@ def get_notes():
     # check if a user us saved in session
     if session.get('user'):
         # retrieve notes from database
-        my_notes = db.session.query(Note).all() #.filter_by(user_id=session['user_id'])
+        my_notes = db.session.query(Note).all()  # .filter_by(user_id=session['user_id'])
 
         return render_template('notes.html', notes=my_notes, user=session['user'])
     else:
@@ -55,7 +55,7 @@ def get_note(note_id):
     # check if a user saved in session
     if session.get('user'):
         # retrieve note from database
-        my_note = db.session.query(Note).filter_by(id=note_id).one() #, user_id=session['user_id']
+        my_note = db.session.query(Note).filter_by(id=note_id).one()  # , user_id=session['user_id']
 
         # create a comment form object
         form = CommentForm()
@@ -214,7 +214,7 @@ def new_comment(note_id):
         return redirect(url_for('login'))
 
 
-@app.route('/notes/<note_id>/Like', methods=['POST'])
+@app.route('/notes/<note_id>/LikeNote', methods=['POST'])
 def like_note(note_id):
     # check if a user is saved in session
     if session.get('user'):
@@ -228,13 +228,41 @@ def like_note(note_id):
         return redirect(url_for('login'))
 
 
-@app.route('/notes/<note_id>/Dislike', methods=['POST'])
+@app.route('/notes/<note_id>/DislikeNote', methods=['POST'])
 def dislike_note(note_id):
     # check if a user is saved in session
     if session.get('user'):
         # retrieve note from database
         note = db.session.query(Note).filter_by(id=note_id).one()
         note.score = note.score - 1
+        db.session.commit()
+        return redirect(url_for('get_note', note_id=note_id))
+    else:
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
+
+
+@app.route('/notes/<note_id>/LikeComment/<comment_id>', methods=['POST'])
+def like_comment(note_id, comment_id):
+    # check if a user is saved in session
+    if session.get('user'):
+        # retrieve note from database
+        updateComment = db.session.query(Comment).filter_by(id=comment_id).one()
+        updateComment.score = updateComment.score + 1
+        db.session.commit()
+        return redirect(url_for('get_note', note_id=note_id))
+    else:
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
+
+
+@app.route('/notes/<note_id>/DislikeComment/<comment_id>', methods=['POST'])
+def dislike_comment(note_id, comment_id):
+    # check if a user is saved in session
+    if session.get('user'):
+        # retrieve note from database
+        updateComment = db.session.query(Comment).filter_by(id=comment_id).one()
+        updateComment.score = updateComment.score - 1
         db.session.commit()
         return redirect(url_for('get_note', note_id=note_id))
     else:
