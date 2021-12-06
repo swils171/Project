@@ -20,12 +20,12 @@
         <div class="navdiv">
             <nav>
                 <a href="{{ url_for('index') }}"> Home</a> ||
-                <a href="{{ url_for('get_notes') }}"> My Notes</a> ||
-                <a href="{{ url_for('new_note') }}">Add Note</a>
+                <a href="{{ url_for('get_notes') }}"> Messages</a> ||
+                <a href="{{ url_for('new_note') }}"> Add Message</a>
             </nav>
         </div>
 
-        <h1>Welcome {% if user %}{{user}}{% endif %}to the 49er Notes App!</h1>
+        <h1>Welcome {% if user %}{{user}}{% endif %}to the Cooler!</h1>
 
         <h2>Use this site to maintain and organize your notes.</h2>
         <div class="formwrapper">

@@ -3,9 +3,9 @@ body {
     background-image: url("water-update.jpg");
     }
 h1{
-    color:green;
+    color:blue;
 }
 h2{
-    color:gold;
-    background:green;
+    color:white;
+    background:#00008B;
 }

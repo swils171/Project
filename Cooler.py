@@ -45,7 +45,7 @@ def get_notes():
         # retrieve notes from database
         my_notes = db.session.query(Note).all()  # .filter_by(user_id=session['user_id'])
 
-        return render_template('notes.html', notes=my_notes, user=session['user'])
+        return render_template('notes.html', notes=my_notes, user=session['user'], id=session['user_id'])
     else:
         return redirect(url_for('login'))
 

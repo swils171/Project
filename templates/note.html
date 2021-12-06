@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1>Welcome {{user}} to the 49er Notes App!</h1>
+<h1>Welcome {{user}} to the Cooler!</h1>
 
 <h1>Note details</h1>
 
@@ -41,12 +41,8 @@
     </tr>
     <nav>
         <a href="{{ url_for('index') }}"> Home</a> ||
-        <a href="{{url_for('get_notes') }}"> My Notes </a> ||
-        <a href="{{ url_for('new_note') }}">Add Note</a>
-
-    </nav>
-
-    <nav>
+        <a href="{{url_for('get_notes') }}">Messages</a> ||
+        <a href="{{ url_for('new_note') }}">Add Message</a> ||
         <a href="{{ url_for('logout')}}">Logout</a>
     </nav>
 </table>
