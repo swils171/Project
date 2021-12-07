@@ -33,16 +33,12 @@
                 <input type="submit" value="Like">
             </form>
         </td>
-        <td>
-            <form action="{{ url_for('dislike_note', note_id=note.id) }}" method="post">
-                <input type="submit" value="Dislike">
-            </form>
-        </td>
     </tr>
     <nav>
         <a href="{{ url_for('index') }}"> Home</a> ||
         <a href="{{url_for('get_notes') }}">Messages</a> ||
         <a href="{{ url_for('new_note') }}">Add Message</a> ||
+        <a href="{{ url_for('get_peers') }}"> Peers</a> ||
         <a href="{{ url_for('logout')}}">Logout</a>
     </nav>
 </table>
@@ -55,9 +51,6 @@
     <li>{{ comment.content }}     Score: {{ comment.score }}
         <form action="{{ url_for('like_comment', note_id=note.id, comment_id=comment.id) }}" method="post">
             <input type="submit" value="Like">
-        </form>
-        <form action="{{ url_for('dislike_comment', note_id=note.id, comment_id=comment.id) }}" method="post">
-            <input type="submit" value="Dislike">
         </form>
     </li>
     {% endfor %}

@@ -50,6 +50,19 @@ def get_notes():
         return redirect(url_for('login'))
 
 
+# show peers function
+@app.route('/peers')
+def get_peers():
+    # check if a user us saved in session
+    if session.get('user'):
+        # retrieve notes from database
+        my_notes = db.session.query(User).all()  # .filter_by(user_id=session['user_id'])
+
+        return render_template('peers.html', users=my_notes, user=session['user'], id=session['user_id'])
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/notes/<note_id>')
 def get_note(note_id):
     # check if a user saved in session
@@ -235,6 +248,7 @@ def like_note(note_id):
         return redirect(url_for('login'))
 
 
+"""
 @app.route('/notes/<note_id>/DislikeNote', methods=['POST'])
 def dislike_note(note_id):
     # check if a user is saved in session
@@ -247,6 +261,7 @@ def dislike_note(note_id):
     else:
         # user is not in session redirect to login
         return redirect(url_for('login'))
+"""
 
 
 @app.route('/notes/<note_id>/LikeComment/<comment_id>', methods=['POST'])
@@ -263,6 +278,7 @@ def like_comment(note_id, comment_id):
         return redirect(url_for('login'))
 
 
+"""
 @app.route('/notes/<note_id>/DislikeComment/<comment_id>', methods=['POST'])
 def dislike_comment(note_id, comment_id):
     # check if a user is saved in session
@@ -275,7 +291,7 @@ def dislike_comment(note_id, comment_id):
     else:
         # user is not in session redirect to login
         return redirect(url_for('login'))
-
+"""
 
 app.run(host=os.getenv('IP', '127.0.0.1'), port=int(os.getenv('PORT', 5000)), debug=True)
 

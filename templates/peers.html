@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UNCC Notes App">
+    <title>UNCC Notes App - View your Note</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+
+
+    <nav>
+        <a href="{{ url_for('index') }}"> Home</a> ||
+        <a href="{{url_for('get_notes') }}">Messages</a> ||
+        <a href="{{ url_for('new_note') }}">Add Message</a> ||
+        <a href="{{ url_for('get_peers') }}"> Peers</a> ||
+        <a href="{{ url_for('logout')}}">Logout</a>
+    </nav>
+
+    <h1>Peers</h1>
+
+
+    {% for usr in users %}
+    <p>
+        {{usr.first_name}}  {{usr.last_name}} || {{ usr.email }}
+    </p>
+    
+        
+   
+    {% endfor %}
+    
+</body>
+</html>
