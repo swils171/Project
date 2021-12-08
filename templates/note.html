@@ -32,6 +32,9 @@
             <form action="{{ url_for('like_note', note_id=note.id) }}" method="post">
                 <input type="submit" value="Cheer">
             </form>
+            <a href="{{ url_for('new_report', note_id=note.id) }}">
+                <input type="submit" value="Report">
+            </a>
         </td>
     </tr>
     <nav>
@@ -48,13 +51,10 @@
 <h2>Comments</h2>
 <ul>
     {% for comment in note.comments %}
-    <li>{{ comment.content }}     Cheers: {{ comment.score }}
+    <li>{{ comment.content }} Cheers: {{ comment.score }}
         <form action="{{ url_for('like_comment', note_id=note.id, comment_id=comment.id) }}" method="post">
             <input type="submit" value="Cheer">
         </form>
-        <a href="{{ url_for('new_report', note_id=note.id) }}">
-            <input type="submit" value="Report">
-        </a>
     </li>
     {% endfor %}
 </ul>
