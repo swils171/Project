@@ -9,6 +9,7 @@ from database import db
 from models import Note as Note
 from models import User as User
 from models import Comment as Comment
+from models import Report as Report
 from forms import RegisterForm
 from forms import LoginForm
 from forms import CommentForm
@@ -292,6 +293,35 @@ def dislike_comment(note_id, comment_id):
         # user is not in session redirect to login
         return redirect(url_for('login'))
 """
+
+
+@app.route('/notes/<note_id>/new_report', methods=['GET', 'POST'])
+def new_report(note_id):
+    # check if a user is saved in session
+    if session.get('user'):
+        # check method used for request
+        if request.method == 'POST':
+            # get title data
+            title = request.form['title']
+            # get note data
+            text = request.form['reportText']
+            # create data stamp
+            from datetime import date
+            today = date.today()
+            # format date mm/dd/yyyy
+            today = today.strftime("%m-%d-%Y")
+            report = Report(int(note_id), title, text, today, session['user_id'])
+            db.session.add(report)
+            db.session.commit()
+
+            return redirect(url_for('get_notes'))
+        else:
+            # GET request - show new request form
+            return render_template('new_report.html', user=session['user'])
+    else:
+        # user is not in session redirect to login
+        return redirect(url_for('login'))
+
 
 app.run(host=os.getenv('IP', '127.0.0.1'), port=int(os.getenv('PORT', 5000)), debug=True)
 
